@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .demo {
+      background: #ccc;
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .red {
+      background-color: red;
+    }
+    .green {
+      background-color: green;
+    }
+    .blue {
+      background-color: blue;
+    }
+
+
+    .active {
+      background-color: red;
+    }
+
+    .fontS {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!-- <div
+    class="demo"
+    @click="attachRed = !attachRed"
+    :class="divClasses"
+    ></div>
+  <div class="demo"></div>
+  <div class="demo" :class="[color, { red: attachRed }]"></div>
+  <input v-model="color"> -->
+
+  <div :class="classobj">test</div>
+  <button @click="isActive = !isActive">change</button>
+</div>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+  /*
+    boolean 속성에 의해 class가 토글 된다. 바인딩된 객체는 인라인일필요가 없습니다.
+    컴퓨터 속성으로 객체를 반환할수도 있는데. 이는 강력한 패턴이다.
+
+  */
+  new Vue({
+    el: "#app",
+    data: {
+      isActive: false
+    },
+    computed: {
+      classobj: function(){
+        return {
+          active: this.isActive,
+          fontS: this.isActive
+        }
+      }
+    }
+  })
+  /*
+    :class="{ red: attachRed }"
+  */
+    // new Vue({
+    //   el:"#app",
+    //   data: {
+    //     attachRed: false,
+    //     color: 'green'
+    //   },
+    //   computed: {
+    //     divClasses: function(){
+    //       return {
+    //         red: this.attachRed,
+    //         blue: !this.attachRed
+    //       }
+    //     }
+    //   }
+    // })
+  </script>
+</body>
+</html>

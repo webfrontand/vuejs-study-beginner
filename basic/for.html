@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="arrayItems.push('reactjs')">new Items</button>
+    <ul>
+      <li v-for="(arrayItem,index) in arrayItems">{{ index}} = {{ arrayItem }}</li>
+    </ul>
+
+    <ul>
+      <li v-for="n in 5">{{n}}</li>
+    </ul>
+
+
+    <template v-for="person in persons">
+      <h1>{{ person.name }}</h1>
+      <p>{{ person.age }}</p>
+    </template>
+    <ul>
+      <li v-for="(value, key, index) in persons">
+        {{ index }}. {{ key }} : {{ value }}
+      </li>
+    </ul>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        arrayItems: ['nodejs','expressjs','vuejs'],
+        persons: [
+          {
+            name: "Ryu",
+            age: 24
+          },
+          {
+            name: "suzy",
+            age: 30
+          }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p v-if="show">나 보여요?</p>
+    <p v-else>나는요?</p>
+    <button @click="show = !show">버튼</button>
+    <input type="text" v-model="text">
+    <p v-if="text === 'A'">A!</p>
+    <p v-else-if="text === 'B'">B!</p>
+    <p v-else-if="text === 'C'">C!</p>
+    <P v-else>아무것도 아니야!</P>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        show: true,
+        text: 'A'
+      }
+    })
+  </script>
+</body>
+</html>
