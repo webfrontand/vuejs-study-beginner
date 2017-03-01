@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <hello></hello>
+      <world v-for="todo in arrays" v-bind:data="todo" key="todo"></world>
+    </ul>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    Vue.component('world', {
+      props:['data'],
+      template: "<li>{{ data.name }}</li>"
+    });
+    Vue.component('hello', {
+      template: "<li>world</li>"
+    });
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        arrays: [
+          {
+            name: "ryu",
+            age: 24
+          },
+          {
+            name: "suzy",
+            age: 30
+          }
+        ]
+      }
+    });
+
+
+  </script>
+</body>
+</html>

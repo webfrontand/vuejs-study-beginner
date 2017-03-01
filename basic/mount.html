@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ msg }}</h1>
+  </div>
+  <div id="app1"></div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    var data = {
+      msg: "hello world"
+    };
+
+    var vm = new Vue({
+      // el: "#app",
+      data: data
+    });
+    vm.$mount("#app");
+
+    var vm1 = new Vue({
+      template: "<h1>hello!</h1>"
+    });
+
+    vm1.$mount("#app1")
+  </script>
+</body>
+</html>

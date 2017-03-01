@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+<body>
+  <div id="app">
+    <h1>{{ title }}</h1>
+    <h2>{{ uppercaseTitle }}</h2>
+    <button @click="show" ref="myButton"> show </button>
+    <p v-if="showParagraph">this is not always visible</p>
+  </div>
+
+  <div id="app1">
+    <h1>{{ title }}</h1>
+    <h2>{{ uppercaseTitle }}</h2>
+    <button @click="show"> show </button>
+    <p v-if="showParagraph">this is not always visible</p>
+    <button @click="onchange">change</button>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        title: "hello world",
+        showParagraph: false
+      },
+      methods: {
+        show: function(){
+          this.showParagraph = true;
+          this.updateTitle('update title');
+          this.$refs.myButton.innerText = "Test";
+        },
+        updateTitle: function(title){
+          this.title = title;
+        }
+      },
+      computed: {
+        uppercaseTitle: function(){
+          return this.title.toUpperCase();
+        }
+      },
+      watch: {
+        title: function(value){
+          alert('title change'+value);
+        }
+      }
+    });
+
+
+    var vm1 = new Vue({
+      el: "#app1",
+      data: {
+        title: "hello world",
+        showParagraph: false
+      },
+      methods: {
+        show: function(){
+          this.showParagraph = true;
+          this.updateTitle('update title');
+        },
+        alertMe: function(){
+          alert('알립니다!')
+        },
+        updateTitle: function(title){
+          this.title = title;
+        },
+        onchange: function(){
+          vm.title = "다른 인스턴스에서 변경시키기!"
+        }
+      },
+      computed: {
+        uppercaseTitle: function(){
+          return this.title.toUpperCase();
+        }
+      },
+      watch: {
+        title: function(value){
+          alert('title change'+value);
+        }
+      }
+    });
+    console.log(vm1);
+    console.log(vm1.$el.style.backgroundColor="red");
+    console.log(vm1.$data);
+    console.log(vm1.$refs)
+
+    /*
+      data는 프록시 처리된다.
+
+    */
+  // setTimeout(function(){
+  //   vm.title = "바깥에서 바꿔본다";
+  //   vm1.alertMe();
+  // }, 2000)
+    /*
+      다른 인스턴스에서 변경이 가능하다.
+      심지어 인스턴스 안말고 script 에서도
+
+    */
+  </script>
+</body>
+</html>
