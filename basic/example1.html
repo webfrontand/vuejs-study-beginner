@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<div id="app">
+	<div>
+	  <p>current value: {{ value }}</p>
+    <button @click="value += 5">add 5</button>
+    <button @click="value += 1">add 1</button>
+    <p>{{ result }}</p>
+	</div>
+</div>
+<body>
+<script src="https://unpkg.com/vue"></script>
+<script>
+
+
+	new Vue({
+		el: "#app",
+		data: {
+			value: 0
+		},
+    computed: {
+      result: function(){
+        return this.value == 37 ? 'done' : 'yet'
+      }
+    },
+    watch: {
+      result: function(){
+        var vm = this;
+        setTimeout(function(){
+          vm.value = 0;
+        }, 5000)
+      }
+    }
+	})
+</script>
+</body>
+</html>

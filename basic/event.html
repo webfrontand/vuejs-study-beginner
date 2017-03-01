@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <h1 @click="increment(2)">{{ counter }}</h1>
+  <p v-on:mousemove="updateMouse">
+    {{ x }} | {{ y }}
+    <span v-on:mousemove.stop>spot</span>
+  </p>
+  <input type="text" v-on:keyup.enter.space="alertMe">
+</div>
+
+<div id="app2">
+  <div>
+    <button @click="alertMe">show alert</button>
+  </div>
+  <div>
+    <input type="text" v-on:keydown="value = $event.target.value">
+    <p>{{ value }}</p>
+  </div>
+</div>
+<script src="https://unpkg.com/vue"></script>
+<script>
+/*
+  v-on:click은 @click으로 축약가능
+  !! clinetX, clientY
+
+  이벤트 전파 방해 stopPropagation
+
+  v-on:mousemove.stop === e.stopPropagation();
+
+
+
+  key event
+  v-on:keyup="alertMe"
+  v-on:keyup.enter
+  v-on:keyup.space
+
+  v-on:keydown="value = $event.target.value"
+*/
+
+  new Vue({
+    el: "#app2",
+    data: {
+      value:''
+    },
+    methods: {
+      alertMe: function(){
+        alert('hello world')
+      },
+      eventkey: function(e){
+        this.value = e.target.value;
+      }
+    }
+  })
+  new Vue({
+    el:"#app",
+    data: {
+      counter: 0,
+      x: 0,
+      y: 0
+    },
+    methods: {
+      increment: function(x){
+        this.counter += x;
+      },
+      updateMouse: function(e){
+        this.x = e.clientX;
+        this.y = e.clientY;
+      },
+      alertMe: function(){
+        alert('alert!')
+      }
+      // dummy: function(e){
+      //   e.stopPropagation();
+      // }
+    }
+  })
+</script>
+</body>
+</html>

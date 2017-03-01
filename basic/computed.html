@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="counter++">Increment</button>
+    <button @click="counter--">Decrement</button>
+    <button @click="second++">second increment</button>
+    <p>Counter: {{ counter }} | {{ second }}</p>
+    <p>Result: {{ computedResult }}</p>
+    <p>Result Methods: {{ result() }}</p>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+
+  /*
+    computed 프로퍼티의 사용이유?에 대해서 명확히 잘 모르겠다.
+    계산된 속성이라.. 캐시되며 의존하고 있는 반응형 속성이 변경되는 경우
+    다시 평가된다..
+
+    일단 아래의 코드는 코드가 '중복' 되는 이슈가 존재한다.
+
+    코드를 한번 줄여보자.
+
+    메소드를 이용한것과 계산된 속성을 이용한 것의 차이는 도대체 무엇인가..
+    의존된 프로퍼티가 변경되는 경우만 실행된다? ★★
+
+
+    watch: {
+      counter: // data에 있는 값에 대한 감시
+    }
+
+  */
+  new Vue({
+    el: "#app",
+    data: {
+      counter: 0,
+      second: 0
+    },
+    computed: {
+      computedResult: function(){
+        console.log('computed');
+        return this.counter > 5 ? 'big' : 'small'
+      }
+    },
+    methods: {
+      result: function(){
+        console.log('methods');
+        return this.counter > 5 ? 'big' : 'small'
+      }
+    },
+    watch: {
+      counter: function(value, oldValue){
+        // alert(value+","+oldValue); // 변화가 감지되면 alert창에 value 값을 찍는다.
+        var vm = this;
+        setTimeout(function(){
+          vm.counter = 0; // 내부 함수의 this는 전역이기 때문에
+        }, 2000)
+      }
+    }
+  });
+    // new Vue({
+    //   el: "#app",
+    //   data: {
+    //     counter: 0,
+    //     result: ''
+    //   },
+    //   methods: {
+    //     increment: function(){
+    //       this.counter++;
+    //       this.result = this.counter > 5 ? 'big' : 'small';
+    //     },
+    //     decrement: function(){
+    //       this.counter--;
+    //       this.result = this.counter > 5 ? 'big' : 'small';
+    //     }
+    //   }
+    // })
+  </script>
+</body>
+</html>

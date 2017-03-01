@@ -3,11 +3,67 @@
 <head>
 	<meta charset="utf-8">
 	<title></title>
-	<script>
-		
-	</script>
 </head>
-<body>
 
+<div id="app">
+	<!-- <p v-once>{{ title }}</p>
+	<p>{{ sayhello() }}</p>
+	<a :href="link">구글</a>
+	<hr>
+	<p v-html="htmllink"></p> -->
+	<p>{{ name }} {{ age }}</p>
+	<p>{{ age * 3 }}</p>
+	<p>{{ random }}</p>
+	<h1>{{ methodrandom() }}</h1>
+</div>
+<body>
+<script src="https://unpkg.com/vue"></script>
+<script>
+/*
+	속성에도 데이터 바인딩이 가능하다. a태그의 href 또는 title 속성등등
+	최선 상태로 유지해준다.(반응형)
+	지시자(v-?)는 이미 정의된 vuejs 전용 속성이며 각 지시자마다 축약형도
+	존재한다. 예를 들어 v-bind:href 는 :href로 축약해서 사용할수 있다.
+	v-on:click은 @click으로 축약가능
+
+
+	지시자 사용의 이해
+	v-once 엘리먼트 및 컴포넌트를 한번만 랜더링합니다. 후속 랜더링에서 변경되어도
+	이를 변경하지 않는다?
+	(Disable Re-Rendering with v-once)
+	v-once를 사용하여 다시 렌더링 사용 중지 - 최적화를 하는 방법이라네..
+
+
+	data에 들어있는 url을 html 형식으로 랜더링하기 위해선 v-html를 사용한다<div className=""></div>
+*/
+	// var app = new Vue({
+	// 	el:"#app",
+	// 	data: {
+	// 		title: "hello world",
+	// 		link: 'http://google.com',
+	// 		htmllink: '<a href="http://www.naver.com">네이버</a>'
+	// 	},
+	// 	methods: {
+	// 		sayhello: function(){
+	// 			this.title = "hello"
+	// 			return this.title
+	// 		}
+	// 	}
+	// })
+
+	new Vue({
+		el: "#app",
+		data: {
+			name: "ryu han gyeong",
+			age: 24,
+			random: Math.floor(Math.random() * 10)
+		},
+		methods: {
+			methodrandom: function(){
+				return Math.random();
+			}
+		}
+	})
+</script>
 </body>
 </html>
