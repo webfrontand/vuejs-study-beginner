@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+</head>
+<body>
+  <div id="app">
+    <my-cmp></my-cmp>
+    <my-cmp></my-cmp>
+    <my-cmp></my-cmp>
+    <hr>
+    <my-child></my-child>
+    <my-child></my-child>
+    <my-child></my-child>
+    <my-child></my-child>
+    <hr>
+    <app-child></app-child>
+    <app-child></app-child>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+
+    // 프록시를 통해서 별도로 var data = {}를 이용해도 된다.
+
+    Vue.component('my-cmp', {
+      data(){
+        return {
+          name: "han"
+        }
+      },
+      methods: {
+        clickMe(){
+          this.name = "change han"
+        }
+      },
+      template: '<p>{{ name }}<button @click="clickMe">Click me</button></p>'
+    });
+
+
+    Vue.component('my-child', {
+      data(){
+        return {
+          name: "child"
+        }
+      },
+      template: '<b>{{ name }}</b>'
+    });
+
+    var child = {
+      data(){
+        return {
+          name: "local"
+        }
+      },
+      template: '<h1>{{ name }}</h1>'
+    };
+
+
+    new Vue({
+      el: "#app",
+      components: {
+        'app-child': child
+      }
+      // data: {
+      //   name: "Ryu"
+      // },
+      // template: '<p>{{ name }}</p>'
+    });
+
+    // component local and global
+
+    /*
+      var child = {}; // local component
+      Vue.component('...',{}) // global component
+
+    */
+  </script>
+</body>
+</html>
