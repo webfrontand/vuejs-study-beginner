@@ -4,6 +4,7 @@
         <p>Many Details</p>
         <p>User Name: {{ name }}</p>
         <h1>{{ switchName() }}</h1>
+        <p>{{ userAge }}</p>
         <button @click="resetName">Reset Name</button>
         <button @click="resetFn()">Reset Name Props</button>
     </div>
@@ -16,6 +17,7 @@
   받아야하는 props가 객체인데, 문자열을 받는다면 프로그램은 정상 작동하지 않을거다.
 
 */
+import { eventBus } from '../main';
 export default {
   props:{
     name: {
@@ -24,7 +26,8 @@ export default {
     },
     resetFn: {
       type: Function
-    }
+    },
+    userAge: Number
   },
   methods: {
     switchName(){
@@ -34,7 +37,19 @@ export default {
       this.name = 'max';
       this.$emit('nameWasReset', this.name);
     }
+  },
+  created(){
+    eventBus.$on('ageWasEdited', (age) => {
+      this.userAge = age;
+    })
   }
+  /*
+    created 라이프 사이클 훅에서 이벤트버스를 부르고
+    eventBus.$on('name...', () => {
+      this... = ....;
+    })
+
+  */
 }
 </script>
 
